@@ -1,0 +1,130 @@
+% !TEX encoding = UTF-8 Unicode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+\usepackage{xeCJK}
+%\setCJKmainfont[BoldFont=STSong, ItalicFont=STKaiti]{STSong}
+
+%\setCJKsansfont[BoldFont=STHeiti]{STXihei}
+%\setCJKmonofont{STFongsong}
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\usepackage{hyperref}
+%\newfontfamily\song{STFangsong}
+
+\name{林 \ \ 特} % Your name
+\address{\href{https://github.com/ZuoMLin}{https://github.com/ZuoMLin}} % Your address
+\address{男 \\ 1992年12月 \\ 浙江温州} % Your secondary addess (optional)
+\address{(86) 131-2098-5680 \\ \href{mailto:linte\_etnil@163.com}{linte\_etnil@163.com}}
+
+\begin{document}
+
+\begin{rSection}{职业目标}
+后台开发工程师
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{教育背景}
+
+\begin{rSubSubsection}{上海 - 同济大学 \ \ \ \ \ \ \ \ \ 计算机科学与技术(工学硕士)}{2014.9 - 2017.4}
+\end{rSubSubsection}
+
+\begin{rSubSubsection}{浙江 - 浙江工业大学 \ \ \ \ 计算机科学与技术(工学学士)}{2010.9 - 2014.6}
+\end{rSubSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{工作经历}
+
+\begin{rSubsection}{美团点评}{2017.5 - 2018.12}{后台开发工程师}{团购技术组}
+\item 团队负责到综团购C端各站点的团单展示、团购交易退款等领域业务。
+\item 本人主要负责团购的个人中心业务（包括订单列表、订单详情、退款操作等），以及团详展示和商详展示的部分业务。
+\end{rSubsection}
+
+\end{rSection}
+
+\begin{rSection}{项目经历}
+
+\begin{rSubsection}{团购订单推送系统}{2018.8}{负责人}{美团点评}
+\item[•]项目背景：由于美团点评业务线众多，平台负责对各业务线订单列表收口做统一展示，技术方案是平台存储各业务线主动推送的订单数据。
+\item[•]项目描述：团购订单推送系统负责在用户的到综团购订单状态发生变化时，及时正确地将订单状态信息推送到平台订单中心。系统通过监听订单、券、UGC等订单状态变化数据源的Mafka消息，触发订单状态计算和推送。为了保证订单推送系统的正确性，避免由于依赖方服务不稳定或网络抖动导致的订单状态计算失败和推送失败问题，系统在触发推送前先将订单状态消息落库，并引入定时补偿job捞取失败消息重试。同时系统通过各环节的打点监控和告警提供及时运维能力。目前系统支持了日均350W的推送量。
+\item[•]项目职责：负责系统的方案设计和开发。
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{周期销量展示系统}{2018.4 - 2018.5}{开发}{美团点评}
+\item[•]项目背景：团单销量需要从原先的累计销量扩展到支持月销、季销、半年销不同时间维度、分门店、分城市的销量实时展示。
+\item[•]项目描述：周期销量展示系统包括销量更新服务，展示配置服务和展示查询服务。系统为了支持不同时间维度的销量展示，设计了当天汇总表（包含当天销量数据，历史汇总数据）和历史明细表，同时为了支持分门店和分城市的销量设计了对应的门店和城市表，系统通过监听验券/撤销验券的销量变更消息，触发销量的变更，并通过Redis锁避免对同一个团单的并发变更操作，引入事务保证销量变更的原子性和一致性，加锁失败或是处理失败的变更请求会通过生产Mafka消息的形式进行重试。系统通过hive表的对账保证销量数据的正确性和问题的及时发现。
+\item[•]项目职责：参与系统的方案设计，负责销量展示查询服务的开发。
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{商品货架展示系统}{2017.8}{开发}{美团点评}
+\item[•]项目背景：到综商户下的商品类型不仅有团购，还有其他比如预定类的商品，产品侧需求商户页下的不同商品模块融合成一个统一的商品货架。
+\item[•]项目描述：商品货架展示系统提供聚合各类型商品的货架展示能力，用户通过同一个筛选标签可以筛选出不同类型的商品。系统定义了SPI接口用于获取其他类型商品的货架商品数据，并通过在表中落商品货架的配置信息，提升货架的扩展能力。目前系统支持了齿科预约的融合货架展示需求。
+\item[•]项目职责：参与系统的前期业务方沟通和方案设计，负责系统的具体实施和联调上线。
+\end{rSubsection}
+
+\end{rSection}
+
+
+
+%----------------------------------------------------------------------------------------
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{职业技能}
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+计算机语言 & 熟悉Java，具备良好的编程规范，了解Python，C++\\
+J2EE开发 & 熟悉Spring，MyBatis框架，使用过Shiro和Spring Boot构建Web项目\\
+数据库/缓存 & 熟悉MySQL，Redis\\
+外语水平 & CET-6\\
+其他 & 具备微服务架构下的设计开发经验，熟悉常见的设计模式
+\end{tabular}
+
+\end{rSection}
+
+
+
+%----------------------------------------------------------------------------------------
+%	EXAMPLE SECTION
+%----------------------------------------------------------------------------------------
+
+%\begin{rSection}{Section Name}
+
+%Section content\ldots
+
+%\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
